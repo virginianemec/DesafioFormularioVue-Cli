@@ -1,6 +1,8 @@
 <template>
   <div class="coder--header">
-    <div>Septiembre 2022</div>
+    <div>
+      Primavera con Funconalidad pero sin mucho Style!! 21 de Septiembre 2022
+    </div>
   </div>
 </template>
 
@@ -14,7 +16,7 @@ export default {
 .coder--header {
   background-color: #393b43;
   color: white;
-  font-size: 25px;
+  font-size: 12px;
   padding: 10px;
 }
 </style>

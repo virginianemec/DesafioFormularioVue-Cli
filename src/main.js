@@ -1,11 +1,10 @@
 import Vue from "vue";
-import VueForm from "vue-form";
 import App from "./App.vue";
+import VueForm from "vue-form";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-Vue.config.productionTip = false;
 Vue.use(VueForm);
+Vue.config.productionTip = false;
 
 Vue.filter("categoryFilter", (value) => {
   console.log("en el mail");

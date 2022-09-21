@@ -6,13 +6,13 @@
       <thead>
         <tr class="table--tr">
           <th>ID</th>
-          <th>NAME</th>
-          <th>PRICE</th>
-          <th>CATEGORY</th>
+          <th>NOMBRE</th>
+          <th>PRECIO</th>
+          <th>CATEGORIA</th>
           <th>A LA VENTA?</th>
         </tr>
       </thead>
-      <tbody v-for="product in products" :key="product.id">
+      <tbody v-for="(product, i) in products" :key="i">
         <tr>
           <td class="table--td">{{ product.id }}</td>
           <td class="table--td">
@@ -61,7 +61,7 @@ export default {
   justify-content: space-around;
   gap: 10px;
   width: 100%;
-  padding: 20px;
+  padding-top: 20px;
 }
 table {
   width: 90%;
@@ -73,18 +73,17 @@ table {
   transition: 0.3s;
   color: #2c3e50;
   text-align: left;
+  background-color: aliceblue;
 }
 .titleTable {
-  background-color: #babcc2;
-  /* color: white;*/
+  background-color: #555555;
+  color: white;
   text-align: center;
   font-size: 15px;
-  padding-top: 10px;
+  padding: 10px;
   width: 90%;
 }
-/*table:hover {
-  transform: scale(1.05);
-}*/
+
 th {
   text-align: left;
   font-size: 16px;
