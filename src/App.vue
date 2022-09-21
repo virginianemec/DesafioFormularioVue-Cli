@@ -6,7 +6,9 @@
       :presentation_name="this.presentation_name"
       :workDescription="this.workDescription"
     ></HeaderComponent>
-    <div class="div--container">
+    <FormComponent @itemAdd="itemAddFromForm($event)"
+    :products="this.products" ></FormComponent>
+    <!-- <div class="div--container">
       <vue-form
         :state="formStateProducts"
         @submit.prevent="productAdd()"
@@ -78,7 +80,7 @@
           <button type="submit" class="btn btn-primary" @keyup.enter="submit">Nuevo</button>
         </div>
       </vue-form>
-    </div>
+    </div>-->
     <TableComponente :products="this.products"></TableComponente>
     <FooterComponent />
   </div>
@@ -88,17 +90,19 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
 import TableComponente from "./components/TableComponente.vue";
+import FormComponent from "./components/FormComponent.vue";
 
 export default {
   name: "App",
   data() {
     return {
-      formStateProducts: {},
       products: [],
       title: "Hello Coderhouse!",
       presentation_name: "Mi nombre es Virginia Nemec",
       workDescription: `PROYECTO VUE CLI CON FORMULARIO <br>
       Instancia un formulario Vue/Cli con validaciones. `,
+      /*
+      formStateProducts: {},
       product: {
         id: "",
         name: "",
@@ -107,74 +111,21 @@ export default {
         category: "",
         activo: 1,
       },
+      */
     };
   },
   components: {
     HeaderComponent,
     FooterComponent,
     TableComponente,
+    FormComponent,
   },
   methods: {
-    itemAddFromForm() {
-      this.product.id = this.products.length + 1;
-      const obj = Object.assign({}, this.product);
-      this.products.push(obj);
+    itemAddFromForm(objProduct) {
+      objProduct.id = this.products.length + 1;
+      this.products.push(objProduct);
       this.resetProduct();
       console.log("add item");
-    },
-    productAdd() {
-      if (this.formStateProducts.$invalid) {
-        alert("Los datos no son correctos. Verifiquelos por favor.");
-        return;
-      }
-      alert("Guardamos el item");
-      this.itemAddFromForm();
-    },
-    resetProduct() {
-      this.product = {
-        id: "",
-        name: "",
-        price: "",
-        stock: "",
-        category: "",
-        activo: 1,
-      };
-    },
-    customValidator: function () {
-      return this.productExists() ? false : true;
-    },
-    activoValidator() {
-      return this.product.activo ? true : false;
-    },
-    priceValidator() {
-      let respuesta = true;
-      if (this.product.category === "Comida sin TACC") {
-        if (this.product.price > 1500) {
-          //si es sin tacc debiera valer menos de 1500.
-          respuesta = false;
-        }
-      }
-      return respuesta;
-    },
-    productExists() {
-      let respuesta = false;
-      let prodExists = this.products.find(
-        (prod) => prod.name == this.product.name
-      );
-      if (prodExists) {
-        respuesta = true;
-      }
-      return respuesta;
-    },
-    categoryValidator() {
-      let respuesta = true;
-      if (this.product.category === "Comida sin TACC") {
-        if (this.product.price > 1500) {
-          //si es sin tacc debiera valer menos de 1500.
-          respuesta = false;
-        }
-      }
-      return respuesta;
     },
   },
 };
@@ -187,30 +138,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-p {
-  text-align: left;
-}
-.formulario {
-  border: 1px solid #000;
-  display: flex;
-  flex-flow: row;
-  width: 80%;
-  margin: auto;
-  padding: 25px;
-  /* border-radius: 15px; */
-  box-shadow: 2px 2px 10px rgb(142, 142, 142);
-  transition: 0.3s;
-  color: #2c3e50;
-  text-align: center;
-  justify-content: space-around;
-}
-.div--container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  width: 100%;
-  padding: 20px;
 }
 </style>

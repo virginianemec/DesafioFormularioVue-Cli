@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <div class="div--container">
+    <div class="titleTable">LISTADO DE PRODUCTOS</div>
     <table class="table">
       <thead>
         <tr class="table--tr">
@@ -79,6 +80,7 @@ table {
   text-align: center;
   font-size: 15px;
   padding-top: 10px;
+  width: 90%;
 }
 /*table:hover {
   transform: scale(1.05);
