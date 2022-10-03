@@ -1,8 +1,6 @@
 <template>
   <div class="coder--header">
-    <div>
-      Primavera con Funconalidad pero sin mucho Style!! 21 de Septiembre 2022
-    </div>
+    <div>Entrega 5 - Desafio Form with Router and Store - Septiembre 2022</div>
   </div>
 </template>
 

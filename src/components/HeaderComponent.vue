@@ -4,7 +4,6 @@
       <div v-html="title"></div>
       <div v-html="presentation_name"></div>
     </h1>
-    <div class="descripcion" v-html="workDescription"></div>
   </div>
 </template>
 
@@ -14,7 +13,6 @@ export default {
   props: {
     title: String,
     presentation_name: String,
-    workDescription: String,
   },
 };
 </script>
@@ -27,11 +25,6 @@ export default {
 h1 {
   color: #e5f876;
   font-size: 15px;
-  padding: 10px;
-}
-.descripcion {
-  background-color: #e5f876;
-  color: black;
   padding: 10px;
 }
 </style>
