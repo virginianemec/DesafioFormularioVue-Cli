@@ -53,7 +53,6 @@ export default {
           console.error(err);
         });
     },
-    //  .delete(`${this.urlCarrito}/${idProducto}`)
     async productsReset({ commit, state }) {
       state.products.forEach(async (element) => {
         const valId = element.id;
@@ -89,7 +88,6 @@ export default {
         .put(URL + valId, data)
         .then(async (response) => {
           console.log(response);
-          //await context.dispatch("productsFromApi");
         })
         .catch((err) => {
           alert(err);
@@ -101,15 +99,23 @@ export default {
         .delete(URL + valId)
         .then(async (response) => {
           console.log(response);
-          // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
         })
         .catch((err) => {
           alert("No se pudo borrar el producto. " + err);
         })
-        .finally(
-          () => console.log("Peticion terminada - volver a traer los datos.")
-          //await context.dispatch("productsFromApi")
+        .finally(() =>
+          console.log("Peticion terminada - volver a traer los datos.")
         );
     },
+
+    /*
+    deleteTodo(id){
+        axios.delete(`url/todos/${id}`)
+        .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+        .catch(err => console.log(err));
+        //this.todos = this.todos.filter(todo => todo.id !== id);
+    }   
+      // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
+    */
   },
 };
