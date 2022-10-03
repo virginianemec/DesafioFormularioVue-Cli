@@ -23,20 +23,6 @@ export default {
   },
 
   actions: {
-    /* async fetchProducts() {
-			carrito.forEach(async (element) => {
-			await axios.get("url/id")
-			.then((response) => {
-					if (element.price > 1000	) {
-						await commit("SET_PRODUCTS", response.data)
-					}
-				});
-			})
-			.catch((err) => {
-				alert(err)
-			})
-			//.finally(() => console.log("Peticion terminada"))
-		}, */
     async productsFromApi({ commit }) {
       await axios
         .get(URL)
@@ -91,22 +77,19 @@ export default {
         activo: product.activo,
         category: product.category,
         image: product.image,
-        stock: 0,
         id: product.id,
-        id_product: product.id_product,
+        id_producto: product.id_producto,
         cant: product.cant,
       };
-      const valId = product.id;
+      const valId = data.id_producto;
+      const header = {
+        "Content-Type": "application/json",
+      };
       await axios
-        .put(
-          `https://632ba1f21aabd8373989647d.mockapi.io/productos/${encodeURIComponent(
-            valId
-          )}`,
-          data
-        )
+        .put(URL + valId, data)
         .then(async (response) => {
           console.log(response);
-          await context.dispatch("productsFromApi");
+          //await context.dispatch("productsFromApi");
         })
         .catch((err) => {
           alert(err);
@@ -115,9 +98,7 @@ export default {
     },
     async productDelete({ commit, state, context }, valId) {
       await axios
-        .delete(
-          "https://632ba1f21aabd8373989647d.mockapi.io/productos/" + valId
-        )
+        .delete(URL + valId)
         .then(async (response) => {
           console.log(response);
           // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
@@ -126,8 +107,8 @@ export default {
           alert("No se pudo borrar el producto. " + err);
         })
         .finally(
-          () => console.log("Peticion terminada - volver a traer los datos."),
-          await context.dispatch("productsFromApi")
+          () => console.log("Peticion terminada - volver a traer los datos.")
+          //await context.dispatch("productsFromApi")
         );
     },
   },

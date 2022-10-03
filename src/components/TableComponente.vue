@@ -71,11 +71,11 @@ export default {
       await this.$store.dispatch("productsReset");
     },
     productUpdate(prod) {
-      console.log(prod.id);
+      console.log(prod.id + " " + prod.id_producto);
       this.$emit("productController", { function: "update", product: prod });
     },
     productDelete(prod) {
-      console.log(prod.id);
+      console.log(prod.id + " " + prod.id_producto);
       this.$emit("productController", { function: "delete", product: prod });
     },
   },

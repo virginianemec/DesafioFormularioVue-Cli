@@ -148,6 +148,10 @@ export default {
         price: "",
         category: "",
         activo: 1,
+        id_producto: 0,
+        cant: 0,
+        negocio: 0,
+        image: "",
       },
       etiqueta: "Nuevo",
     };
@@ -215,9 +219,12 @@ export default {
         id: "",
         name: "",
         price: "",
-        stock: "",
         category: "",
         activo: 1,
+        id_producto: 0,
+        cant: 0,
+        negocio: 0,
+        image: "",
       };
       this.etiqueta = "Nuevo";
     },
@@ -228,7 +235,10 @@ export default {
         this.product.price = objController.product.price;
         this.product.category = objController.product.category;
         this.product.activo = objController.product.activo;
-        this.product.stock = objController.product.stock;
+        this.product.id_producto = objController.product.id_producto;
+        this.product.cant = objController.product.cant;
+        this.product.negocio = objController.product.negocio;
+        this.product.image = objController.product.image;
 
         this.etiqueta = "Actualizar";
       } else {
@@ -239,13 +249,17 @@ export default {
           "question"
         )
           .then(async () => {
-            let id = objController.product.id;
+            let id = objController.product.id_producto;
             await this.$store
               .dispatch("productDelete", id)
-              .then(console.log("se borro el producto"))
+              .then(async () => {
+                this.$alert("Se ha creado el producto.", "Atención", "success");
+                await this.$store.dispatch("productsFromApi");
+                this.resetProduct();
+              })
               .catch(console.log("no se borro el producto"));
           })
-          .catch(console.log("dijo que no cancel"));
+          .catch(console.log("error en el cancel o dijo que no"));
       }
     },
     customValidator: function () {
