@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 const URL = "https://632ba1f21aabd8373989647d.mockapi.io/productos/";
 import axios from "axios";
@@ -83,39 +84,50 @@ export default {
           );
       });
     },
-    // .put(`${this.urlCarrito}/${idCarrito}`, val)
-    async productUpdate({ commit, state }, product) {
-      const data = product;
+    async productUpdate({ commit, state, context }, product) {
+      const data = {
+        name: product.name,
+        price: product.price,
+        activo: product.activo,
+        category: product.category,
+        image: product.image,
+        stock: 0,
+        id: product.id,
+        id_product: product.id_product,
+        cant: product.cant,
+      };
       const valId = product.id;
       await axios
-        // .put(`${URL}${valId}`, product)
-        .put(URL, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-        .then((response) => {
+        .put(
+          `https://632ba1f21aabd8373989647d.mockapi.io/productos/${encodeURIComponent(
+            valId
+          )}`,
+          data
+        )
+        .then(async (response) => {
           console.log(response);
+          await context.dispatch("productsFromApi");
         })
         .catch((err) => {
           alert(err);
         })
-        .finally(() =>
-          console.log("Peticion terminada - volver a traer los datos.")
-        );
+        .finally(console.log("Peticion terminada - volver a traer los datos."));
     },
-    async productDelete({ commit, state }, valId) {
+    async productDelete({ commit, state, context }, valId) {
       await axios
-        .delete(`${URL}${valId}`)
-        .then((response) => {
+        .delete(
+          "https://632ba1f21aabd8373989647d.mockapi.io/productos/" + valId
+        )
+        .then(async (response) => {
           console.log(response);
+          // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
         })
         .catch((err) => {
-          alert(err);
+          alert("No se pudo borrar el producto. " + err);
         })
-        .finally(() =>
-          console.log("Peticion terminada - volver a traer los datos.")
+        .finally(
+          () => console.log("Peticion terminada - volver a traer los datos."),
+          await context.dispatch("productsFromApi")
         );
     },
   },
