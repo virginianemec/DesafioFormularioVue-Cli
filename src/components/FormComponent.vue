@@ -284,8 +284,11 @@ export default {
       let prodExists = this.products.find((prod) => {
         let valor = prod.name;
         let compareValue = valor.toUpperCase();
-        // && prod.id !== this.product.id
-        return compareValue === param;
+        return (
+          compareValue === param &&
+          !this.productNew &&
+          prod.id !== this.product.id
+        );
       });
       if (prodExists) {
         respuesta = true;
